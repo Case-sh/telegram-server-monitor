@@ -17,6 +17,7 @@ last_pid_usage = 0
 last_fd_usage = 0
 first_alarm = True #avoid first alarm due to initialization
 storage = persistence.Persistence()
+host = socket.gethostname()
 
 # thanks to https://web.archive.org/web/20111010015624/http://blogmag.net/blog/read/38/Print_human_readable_file_size
 def sizeof_fmt(num, suffix='B'):
@@ -171,6 +172,11 @@ def commandUsage(message, console):
 str(datetime.datetime.now() - datetime.datetime.fromtimestamp(psutil.boot_time())))
     except BaseException as be:
         text += "Getting uptime failed: {0}\n".format(str(be))
+        
+    try:
+        text += "Load avg:  {0}-{1}-{2} (1-5-15)\n".format(round(os.getloadavg()[0],2),round(os.getloadavg()[1],2),round(os.getloadavg()[2],2))
+    except BaseException as be:
+        text += "Getting CPU failed: {0}\n".format(be)
 
     try:
         text += "CPU: {0} %\n".format(psutil.cpu_percent())
