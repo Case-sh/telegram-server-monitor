@@ -48,7 +48,7 @@ python3 daemon.py
 
 **Open the crontab -e, add this code to the end of the file:**
 ```
-@reboot python3 /home/admin_bot/server_monitoring/bot_tele.py
+@reboot python3 /home/admin_bot/telegram-server-monitor/daemon.py
  ```
 
 To keep your new telegram bot running when you logout you might want to checkout [tmux](https://tmux.github.io/), which is probably shipped with your favorite distribution.
